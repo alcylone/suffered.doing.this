@@ -1,0 +1,19 @@
+const express = require('express'); 
+const bodyParser = require('body-parser');  
+
+const app = express(); 
+
+app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({ extended: true })); 
+
+app.use(express.static('public')); 
+
+app.get('/', (req, res) => {
+  let total=req.query.total;
+
+if (total===undefined||total===''){
+  res.send('Total not supplied');
+} else {
+  res.send((total * 0.15) .toFixed(2));
+}
+});
